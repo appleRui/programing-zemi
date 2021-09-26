@@ -9,3 +9,4 @@ services:
       - 8082:3000
     tty: true
     stdin_open: true
+    stdin_open: true

@@ -38,6 +38,7 @@
                     <span class="content"><%= tweet.content %></span>
                     <span class="timestamp">
                         投稿日 <%= time_ago_in_words(tweet.created_at) %> 前
+                        <%= link_to "コメントする", tweet_comments_path(tweet)%>(<%= tweet.comments.count%>)
                         <% if current_user?(tweet.user) %>
                           <%= link_to "編集", edit_tweet_path(tweet)%>
                           <%= link_to "削除", tweet, method: :delete, data: { confirm: "削除しますか？" } %>

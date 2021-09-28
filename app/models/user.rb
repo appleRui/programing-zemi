@@ -4,6 +4,8 @@ class User < ApplicationRecord
     has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
     has_many :following_user, through: :follower, source: :followed
     has_many :follower_user, through: :followed, source: :follower
+    has_many :likes, dependent: :destroy
+    has_many :liked_tweet, through: :likes, source: :tweet
     #データを保存する前にメアドを小文字にする。
     before_save { email.downcase! } 
     # name は必ず存在し、長さが50字以内であること
@@ -30,5 +32,9 @@ class User < ApplicationRecord
     # フォロー確認をおこなう
     def following?(user)
         following_user.include?(user)
+    end
+    #likeの定義
+    def liked_by?(tweet_id)
+        likes.where(tweet_id: tweet_id).exists?
     end
 end

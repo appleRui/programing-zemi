@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     end
   end
   resources :tweets, only: [:create, :edit, :update, :destroy]
+  post 'like/:id' => 'likes#create', as: 'create_like'
+  delete 'like/:id' => 'likes#destroy', as: 'destroy_like'
 end

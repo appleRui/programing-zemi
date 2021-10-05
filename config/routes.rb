@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :fortunes
   root 'static_pages#home'
   get '/hello-world' => "foo#hello"
   get 'home' => "static_pages#home"
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   delete  'logout' => 'sessions#destroy'
   post 'follow/:id' => 'relationships#follow', as: 'follow' 
   post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow' 
+  get 'fortune' => 'fortunes#index'
+  get 'fortune/:id' => 'fortunes#show'
   resources :users do
     member do
       get :following, :followers
